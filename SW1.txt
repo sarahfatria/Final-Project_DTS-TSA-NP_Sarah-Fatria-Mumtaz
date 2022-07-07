@@ -1,0 +1,43 @@
+en
+conf t
+hostname SW1
+vlan 30
+name SCHOOL
+exit
+vlan 40
+name POLICE
+exit
+interface f0/24
+switchport mode trunk
+exit
+interface f0/23
+switchport mode trunk
+exit
+interface range f0/1 - 9
+switchport mode access
+switchport access vlan 30
+exit
+interface range f0/10 - 20
+switchport mode access
+switchport access vlan 40
+exit
+enable secret c1sco
+line console 0
+password c0ns0l3
+exit
+service password-encryption 
+int vlan 30
+ip address 200.1.1.61 255.255.255.192
+no shutdown
+exit
+ip default-gateway 200.1.1.62
+ip domain-name cisco.com
+crypto key generate rsa
+1024
+username sarah password p4ssw0rd
+line vty 0 4
+login local
+transport input ssh
+exit
+end
+copy run start

@@ -1,0 +1,25 @@
+en
+conf t
+hostname MSW2
+
+int vlan 1
+ip address 192.168.20.2 255.255.255.0
+no shutdown
+exit
+ip default-gateway 192.168.20.1
+
+enable secret c1sc0
+line console 0
+password c0ns0l3
+exit
+service password-encryption 
+ip domain-name cisco.com	
+crypto key generate rsa
+1024
+username sarah password p4ssw0rd
+line vty 0 4
+login local
+transport input ssh
+end
+copy run start
+
